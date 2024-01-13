@@ -1,0 +1,9 @@
+module.exports.Token = require('./token.model');
+module.exports.Customer = require('./customer.model');
+module.exports.Company = require('./company.model');
+module.exports.Staff = require('./staff.model');
+module.exports.Dish = require('./dishes.model');
+module.exports.Ingredient = require('./ingredient.model');
+module.exports.Allergens = require('./allergens.model');
+module.exports.Category = require('./category.model');
+module.exports.AddOn = require('./addOn.model');

@@ -1,0 +1,189 @@
+components:
+  schemas:
+    Customer:
+      $ref: './customer.yml#components/schemas/Customer'
+    Token:
+      $ref: './token.yml#components/schemas/Token'
+    AuthTokens:
+      type: object
+      properties:
+        access:
+          $ref: '#/components/schemas/Token'
+        refresh:
+          $ref: '#/components/schemas/Token'
+    Staff:
+      $ref: './staff.yml#components/schemas/Staff'
+    Error:
+      type: object
+      properties:
+        status:
+          type: number
+          description: The HTTP status code associated with the error.
+          example: 404
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+          example: 'The requested resource was not found.'
+
+    Allergen:
+      $ref: './allergens.yml#components/schemas/Allergen'
+    AllergenUpdate:
+      $ref: './allergens.yml#components/schemas/AllergenUpdate'
+    Category:
+      $ref: './category.yml#components/schemas/Category'
+
+    CategoryCreation:
+      allOf:
+        - $ref: './category.yml#components/schemas/CategoryCreation'
+      required:
+        - name
+        - sequence
+    CategoryUpdate:
+      $ref: './category.yml#components/schemas/CategoryUpdate'
+    CategoryResponse:
+      $ref: './category.yml#components/schemas/CategoryResponse'
+    AddOnCreation:
+      allOf:
+        - $ref: './addOn.yml#/components/schemas/AddOn'
+      required:
+        - name
+        - description
+        - price
+        - category
+    AddOnUpdate:
+      $ref: './addOn.yml#/components/schemas/AddOnUpdate'
+    AddOnResponse:
+      $ref: './addOn.yml#/components/schemas/AddOnResponse'
+    DishCreation:
+      allOf:
+        - $ref: '#/components/schemas/Dish'
+      required:
+        - name
+        - description
+        - price
+        - category
+    DishUpdate:
+      $ref: './dishes.yml#/components/schemas/DishUpdate'
+    DishResponse:
+      $ref: './dishes.yml#/components/schemas/DishResponse'
+    UpdateStatusRequest:
+      $ref: './dishes.yml#/components/schemas/UpdateStatusRequest'
+    DailyMenu:
+      $ref: './dailyMenu.yml#/components/schemas/DailyMenu'
+    WeeklyMenu:
+      $ref: './weeklyMenu.yml#/components/schemas/WeeklyMenu'
+    Ingredient:
+      $ref: './ingredient.yml#/components/schemas/Ingredient'
+    IngredientUpdate:
+      $ref: './ingredient.yml#/components/schemas/IngredientUpdate'
+
+  responses:
+    Error:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Can't update
+    DuplicateEmail:
+      description: Email already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Email already taken
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 401
+            message: Please authenticate
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Bad request
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 403
+            message: Forbidden
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 404
+            message: Not found
+    AlreadyExist:
+      description: Item already exists.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 409
+              message:
+                type: string
+                example: Item already exists.
+              metadata:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'E11000 duplicate key error collection: blastdb.Item index: Item_Name dup key: { Item_lower: "item name" }'
+                  index:
+                    type: number
+                    example: 0
+                  code:
+                    type: number
+                    example: 11000
+                  keyPattern:
+                    type: object
+                    example: { 'name_lower': 1 }
+                  keyValue:
+                    type: object
+                    example: { 'name_lower': 'choole bhatoore' }
+    Unprocessable:
+      description: Unprocessable
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 422
+                description: status code
+              message:
+                type: string
+                description: message
+                example: Item belongs to one/more Items
+              metadata:
+                type: object
+                example: { 'itemCount': 1 }
+                description: array of items.
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: backend-base-path(or other name)
+      description: 'Access and refresh tokens in the form of access_token=<access_token>; refresh_token=<refresh_token>'

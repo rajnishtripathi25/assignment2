@@ -1,0 +1,241 @@
+components:
+  schemas:
+    Dish:
+      type: object
+      properties:
+        quantity:
+          type: number
+          description: quantity of the dish
+        name:
+          type: string
+          description: The name of the dish.
+          example: 'Chicken Tikka Masala'
+        description:
+          type: string
+          description: A brief description of the dish.
+          example: 'A delicious curry made with roasted chicken chunks in a spicy sauce.'
+        moreInformation:
+          type: string
+          description: Additional details about the dish.
+          example: 'Served with basmati rice or naan bread.'
+        subCategory:
+          type: string
+          description: The sub-category ID of the dish.
+          example: 507f1f77bcf86cd799439011
+        category:
+          type: string
+          description: The category of the dish.
+          example: 507f1f77bcf86cd799439011
+        ingredients:
+          type: array
+          items:
+            type: string
+          description: The list of ingredients used in the dish.
+          example: ['507f1f77bcf86cd799439011', '507f1f77bcf86cd799439023']
+        pictures:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              type:
+                type: string
+        price:
+          type: number
+          description: The price of the dish.
+          example: 12.99
+        minimum:
+          type: number
+          description: The minimum order quantity for the dish.
+          example: 1
+        multiplyBy:
+          type: number
+          description: The quantity increment for the dish.
+          example: 1
+        maximum:
+          type: number
+          description: The maximum order quantity for the dish.
+          example: 5
+        sapId:
+          type: string
+          description: The SAP identifier for the dish.
+          example: '2e4r523434531'
+        active:
+          type: boolean
+          description: Indicates whether the dish is currently active and available for ordering.
+          example: true
+        allergens:
+          type: array
+          items:
+            $ref: './allergens.yml#/components/schemas/Allergen'
+          description: A list of allergens present in the dish.
+          example: ['507f1f77bcf86cd799439011', '507f1f77bcf86cd799439023']
+
+        byBrand:
+          type: string
+          description: The brand associated with the dish.
+          example: 'Blast Food Inc.'
+    DishUpdate:
+      type: object
+      properties:
+        set:
+          $ref: '#/components/schemas/Dish'
+        unset:
+          type: object
+          default: {}
+          description: Fields to unset
+          additionalProperties: true
+        pull:
+          type: object
+          default: {}
+          description: Fields to pull from an array
+          additionalProperties: true
+        push:
+          type: object
+          default: {}
+          description: Fields to push to an array
+          additionalProperties: true
+        options:
+          type: object
+          default: {}
+          description: Additional options
+          additionalProperties: true
+    DishResponse:
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: 'Chicken'
+                  description:
+                    type: string
+                    example: 'A delicious curry made with roasted chicken chunks in a spicy sauce.'
+                  quantity:
+                    type: integer
+                    example: 0
+                  moreInformation:
+                    type: string
+                    example: 'Served with basmati rice or naan bread.'
+                  category:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: 'test'
+                      id:
+                        type: string
+                        example: '6597cfe28519a25dc272f746'
+                  subCategory:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: 'test'
+                      id:
+                        type: string
+                        example: '6597cfe28519a25dc272f746'
+                  ingredients:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: 'check5 ingredient'
+                        id:
+                          type: string
+                          example: '6596ad509b3b5c76fce0ea82'
+                  pictures:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: 'raj'
+                        url:
+                          type: string
+                          format: uri
+                          example: 'https://example.com/images/chicken_tikka_masala.png'
+                        type:
+                          type: string
+                          example: 'png'
+                        _id:
+                          type: string
+                          example: '6597c19550fc054f5fefb3c9'
+                  price:
+                    type: number
+                    example: 12.99
+                  minimum:
+                    type: integer
+                    example: 1
+                  multiplyBy:
+                    type: integer
+                    example: 1
+                  maximum:
+                    type: integer
+                    example: 5
+                  sapId:
+                    type: string
+                    example: '2e4r523434534'
+                  allergens:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: 'ALLERGENS'
+                        id:
+                          type: string
+                          example: '6597bf1524095c3b666aa15d'
+                  byBrand:
+                    type: string
+                    example: 'Blast Food Inc.'
+                  createdBy:
+                    type: string
+                    example: '65966761a183b521b079f175'
+                  updatedBy:
+                    type: string
+                    example: '65966761a183b521b079f175'
+                  active:
+                    type: boolean
+                    example: true
+                  id:
+                    type: string
+                    example: '6597c19550fc054f5fefb3c8'
+    UpdateStatusRequest:
+      type: object
+      properties:
+        filter:
+          type: object
+          properties:
+            ids:
+              type: array
+              items:
+                type: string
+        status:
+          type: boolean
+        options:
+          type: object
+          default: {}
+      example:
+        filter:
+          ids: ['658fc8f65e4c9e21a3102114']
+        status: true
+      required:
+        - filter
+        - status

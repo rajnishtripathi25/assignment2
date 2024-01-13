@@ -1,0 +1,10 @@
+module.exports.authController = require('./auth.controller');
+module.exports.staffAuthController = require('./staffAuth.controller');
+module.exports.customerController = require('./customer.controller');
+module.exports.companyController = require('./company.controller');
+module.exports.staffController = require('./staff.controller');
+module.exports.dishController = require('./dish.controller');
+module.exports.ingredientController = require('./ingredient.controller');
+module.exports.allergensController = require('./allergens.controller');
+module.exports.categoryController = require('./category.controller');
+module.exports.addOnController = require('./addOn.controller');

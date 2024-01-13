@@ -1,0 +1,35 @@
+components:
+  schemas:
+    Ingredient:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the ingredient.
+      required:
+        - name
+    IngredientUpdate:
+      type: object
+      properties:
+        set:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the ingredient.
+        unset:
+          type: object
+          default: {}
+          description: Fields to unset
+        pull:
+          type: object
+          default: {}
+          description: Fields to pull from an array
+        push:
+          type: object
+          default: {}
+          description: Fields to push to an array
+        options:
+          type: object
+          default: {}
+          description: Additional options

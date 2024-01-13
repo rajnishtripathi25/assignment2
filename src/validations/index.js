@@ -1,0 +1,10 @@
+module.exports.authValidation = require('./auth.validation');
+module.exports.customerValidation = require('./customer.validation');
+module.exports.companyValidation = require('./company.validation');
+module.exports.staffAuthValidation = require('./staffAuth.validation');
+module.exports.staffValidation = require('./staff.validation');
+module.exports.dishValidation = require('./dish.validation');
+module.exports.ingredientValidation = require('./ingredient.validation');
+module.exports.allergensValidation = require('./allergens.validation');
+module.exports.categoryValidation = require('./category.validation');
+module.exports.addOnValidation = require('./addOn.validation');
