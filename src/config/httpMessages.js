@@ -24,16 +24,17 @@ const authMessage = {
   OTP_EXPIRED: 'OTP has expired. Please request a new one.',
   INCORRECT_OTP: 'Incorrect OTP.',
   COMPANY_NOT_FOUND: 'Company not found.',
+  DELETE_USRE: 'User deleted.',
 };
 
-const dishMessages = {
-  CREATED: 'Dish created successfully.',
-  UPDATED: 'Dish updated successfully.',
-  DELETED: 'Dish deleted successfully.',
-  NOT_FOUND: 'Dish not found.',
-  UNABLE_TO_DELETE: 'Unable to delete dish.',
-  ALREADY_EXIST: 'Dish with same [Name/SapId] already exist.',
-  UNABLE_TO_EDIT: 'Unable to update dish.',
+const productMessages = {
+  CREATED: 'Product created successfully.',
+  UPDATED: 'Product updated successfully.',
+  DELETED: 'Product deleted successfully.',
+  NOT_FOUND: 'Product not found.',
+  UNABLE_TO_DELETE: 'Unable to delete Product.',
+  ALREADY_EXIST: 'Product with same [Name/SapId] already exist.',
+  UNABLE_TO_EDIT: 'Unable to update Product.',
 };
 const addOnMessages = {
   CREATED: 'AddOn created successfully.',
@@ -105,7 +106,7 @@ const otpMessages = {
 module.exports = {
   authMessage,
   genericMessages,
-  dishMessages,
+  productMessages,
   otpMessages,
   ingredientMessages,
   allergensMessages,

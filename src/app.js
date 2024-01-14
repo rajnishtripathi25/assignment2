@@ -7,20 +7,14 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const httpStatus = require('http-status');
 const config = require('./config/config');
-const morgan = require('./config/morgan');
 const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const APIError = require('./utils/apiError');
-const apiLogger = require('./middlewares/auditLogger');
 const { genericMessages } = require('./config/httpMessages');
 
 const app = express();
 
-if (config.env !== 'test') {
-  app.use(morgan.successHandler);
-  app.use(morgan.errorHandler);
-}
 // routes to the static file for swager api
 app.use('/v1/docs', express.static('src/docs/schemas'));
 
@@ -50,13 +44,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
-
-// logging middleware
-if (config.logger.enable) {
-  app.use((req, res, next) =>
-    apiLogger(config.logger.allowedRequestTypes, req, res, next)
-  );
-}
 
 // limit repeated failed requests to auth endpoints
 if (config.env === 'production') {

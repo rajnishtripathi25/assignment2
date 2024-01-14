@@ -43,10 +43,10 @@ const verifyToken = async (req, res, cb) => {
     const context = {
       user: {
         ...userObject,
-        isStaff: decoded.isStaff
-      }
+        isStaff: decoded.isStaff,
+      },
     };
-    req.context=context;
+    req.context = context;
 
     cb();
   } catch (error) {
@@ -70,7 +70,7 @@ const auth =
     return verifyToken(req, res, async () => {
       try {
         if (requiredRights.length) {
-          const userRights = roleRights.get(req?.context?.user?.role);
+          const userRights = roleRights.get(req?.context?.user?.userType);
           const hasRequiredRights = requiredRights.some((requiredRight) => {
             return userRights.includes(requiredRight);
           });
